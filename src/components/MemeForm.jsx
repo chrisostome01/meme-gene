@@ -10,9 +10,13 @@ export default function MemeForm() {
 
   useEffect(() => {
     async function getMemes() {
-      const res = await fetch("https://api.imgflip.com/get_memes");
-      const data = await res.json();
-      setAllMemes(data.data.memes);
+      try {
+        const res = await fetch("https://api.imgflip.com/get_memes");
+        const data = await res.json();
+        setAllMemes(data.data.memes);
+      } catch (error) {
+        setAllMemes([])
+      }
     }
     getMemes();
   }, []);
